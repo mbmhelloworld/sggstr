@@ -1,0 +1,25 @@
+// You can add global styles to this file, and also import other style files
+
+/* custom.scss */
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+// Add Bootstrap style overrides here
+// stylelint-disable-next-line scss/dollar-variable-default
+//$primary: #aa02bd;
+//$secondary: #e7b731;
+//$theme-colors: (
+//    primary:    $primary,
+//    secondary:  $secondary,
+//);
+
+// $theme-colors: () !default;
+
+// Add global app styles here
+body {
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}

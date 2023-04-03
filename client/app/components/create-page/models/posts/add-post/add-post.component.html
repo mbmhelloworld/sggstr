@@ -1,0 +1,34 @@
+<div class="card">
+  <h4 class="card-header">Add new Post</h4>
+  <div class="card-body">
+    <form [formGroup]="addPostForm" (ngSubmit)="addPost()">
+      <div class="row row-cols-1 row-cols-sm-auto g-2">
+        <div class="col">
+          <input class="form-control" type="text" name="title"
+                 formControlName="title" placeholder="title">
+        </div>
+        <div class="col">
+          <input class="form-control" type="text" name="text"
+                 formControlName="text" placeholder="text">
+        </div>
+        <div class="col">
+          <select class="form-control" id="select-book" name="book"
+                  formControlName="book">
+            <option *ngFor="let book of books"
+                    [ngValue]=book
+                    [attr.selected]="book._id===book._id ? true : null">
+              {{book.title}}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary" type="submit" [disabled]="!addPostForm.valid">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

@@ -1,0 +1,20 @@
+<div class="card">
+  <h4 class="card-header">Add new Genre</h4>
+  <div class="card-body">
+    <form [formGroup]="addGenreForm" (ngSubmit)="addGenre()">
+      <div class="row row-cols-1 row-cols-sm-auto g-2">
+        <div class="col">
+          <input class="form-control" type="text" name="name"
+                 formControlName="name" placeholder="Name">
+        </div>
+        <div class="col">
+          <button class="btn btn-primary" type="submit" [disabled]="!addGenreForm.valid">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

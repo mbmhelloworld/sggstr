@@ -1,0 +1,85 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card mb-3" *ngIf="!isLoading">
+  <h4 class="card-header">Current Books ({{books.length}})</h4>
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead class="table-secondary">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Creator</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Link</th>
+        <th scope="col">Cover</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="books.length === 0">
+      <tr>
+        <td colspan="4">There are no books in the DB. Add a new book below.</td>
+      </tr>
+      </tbody>
+      <tbody *ngIf="!isEditing">
+      <tr *ngFor="let book of books">
+        <td>{{book.title}}</td>
+        <td>{{book.creator?.foreName}} {{book.creator?.lastName}}</td>
+        <td>{{book.genre?.name}}</td>
+        <td>{{book.buyLink}}</td>
+        <td>{{book.cover}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="enableEditing(book)">
+            <i class="fa fa-pencil"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-danger ms-1" (click)="deleteBook(book)">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tbody *ngIf="isEditing">
+      <tr>
+        <td colspan="4">
+          <form #form="ngForm" (ngSubmit)="editBook(book)">
+            <div class="row row-cols-1 row-cols-sm-auto g-2">
+              <div class="col">
+                <input class="form-control" type="text" name="title" [(ngModel)]="book.title" placeholder="title"
+                       required>
+              </div>
+              <div class="col">
+                <input class="form-control" type="text" name="creator" [(ngModel)]="book.creator" placeholder="creator"
+                       required>
+              </div>
+              <div class="col">
+                <input class="form-control" type="text" name="genre" [(ngModel)]="book.genre" placeholder="genre"
+                       required>
+              </div>
+              <div class="col">
+                <input class="form-control" type="text" name="buyLink" [(ngModel)]="book.buyLink" placeholder="buyLink"
+                       required>
+              </div>
+              <div class="col">
+                <input class="form-control" type="text" name="cover" [(ngModel)]="book.cover" placeholder="cover"
+                       required>
+              </div>
+
+              <div class="col d-flex align-items-center">
+                <button class="btn btn-sm btn-primary me-2" type="submit" [disabled]="!form.form.valid">
+                  <i class="fa fa-floppy-o"></i> Save
+                </button>
+                <button class="btn btn-sm btn-warning" (click)="cancelEditing()">
+                  <i class="fa fa-times"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <app-add-book *ngIf="!isEditing" [books]="books"></app-add-book>
+  </div>
+</div>
+
+

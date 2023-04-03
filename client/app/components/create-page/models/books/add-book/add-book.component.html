@@ -1,0 +1,47 @@
+<div class="card">
+  <h4 class="card-header">Add new Book</h4>
+  <div class="card-body">
+    <form [formGroup]="addBookForm" (ngSubmit)="addBook()">
+      <div class="row row-cols-1 row-cols-sm-auto g-2">
+        <div class="col">
+          <input class="form-control" type="text" name="title"
+                 formControlName="title" placeholder="Title">
+        </div>
+        <div class="col">
+          <select class="form-control" id="select-creator" name="creator"
+                  formControlName="creator">
+            <option *ngFor="let creator of creators"
+                    [ngValue]="creator"
+                    [attr.selected]="creator._id===creator._id ? true : null">
+              {{creator.lastName}}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <select class="form-control" id="select-genre" name="genre"
+                  formControlName="genre">
+            <option *ngFor="let genre of genres"
+                    [ngValue]=genre
+                    [attr.selected]="genre._id===genre._id ? true : null">
+              {{genre.name}}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <input class="form-control" type="text" name="buyLink"
+                 formControlName="buyLink" placeholder="buyLink">
+        </div>
+        <div class="col">
+          <input class="form-control" type="text" name="cover"
+                 formControlName="cover" placeholder="Coverlink">
+        </div>
+        <div class="col">
+          <button class="btn btn-primary" type="submit" [disabled]="!addBookForm.valid">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
